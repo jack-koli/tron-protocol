@@ -18,9 +18,10 @@
 // 	protoc        v3.13.0
 // source: core/contract/account_contract.proto
 
-package core
+package contract
 
 import (
+	core "github.com/jack-koli/tron-protocol/core"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -39,9 +40,9 @@ type AccountCreateContract struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OwnerAddress   []byte      `protobuf:"bytes,1,opt,name=owner_address,json=ownerAddress,proto3" json:"owner_address,omitempty"`
-	AccountAddress []byte      `protobuf:"bytes,2,opt,name=account_address,json=accountAddress,proto3" json:"account_address,omitempty"`
-	Type           AccountType `protobuf:"varint,3,opt,name=type,proto3,enum=protocol.AccountType" json:"type,omitempty"`
+	OwnerAddress   []byte           `protobuf:"bytes,1,opt,name=owner_address,json=ownerAddress,proto3" json:"owner_address,omitempty"`
+	AccountAddress []byte           `protobuf:"bytes,2,opt,name=account_address,json=accountAddress,proto3" json:"account_address,omitempty"`
+	Type           core.AccountType `protobuf:"varint,3,opt,name=type,proto3,enum=protocol.AccountType" json:"type,omitempty"`
 }
 
 func (x *AccountCreateContract) Reset() {
@@ -90,11 +91,11 @@ func (x *AccountCreateContract) GetAccountAddress() []byte {
 	return nil
 }
 
-func (x *AccountCreateContract) GetType() AccountType {
+func (x *AccountCreateContract) GetType() core.AccountType {
 	if x != nil {
 		return x.Type
 	}
-	return AccountType_Normal
+	return core.AccountType_Normal
 }
 
 // Update account name. Account name is not unique now.
@@ -214,10 +215,10 @@ type AccountPermissionUpdateContract struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OwnerAddress []byte        `protobuf:"bytes,1,opt,name=owner_address,json=ownerAddress,proto3" json:"owner_address,omitempty"`
-	Owner        *Permission   `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner,omitempty"`     //Empty is invalidate
-	Witness      *Permission   `protobuf:"bytes,3,opt,name=witness,proto3" json:"witness,omitempty"` //Can be empty
-	Actives      []*Permission `protobuf:"bytes,4,rep,name=actives,proto3" json:"actives,omitempty"` //Empty is invalidate
+	OwnerAddress []byte             `protobuf:"bytes,1,opt,name=owner_address,json=ownerAddress,proto3" json:"owner_address,omitempty"`
+	Owner        *core.Permission   `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner,omitempty"`     //Empty is invalidate
+	Witness      *core.Permission   `protobuf:"bytes,3,opt,name=witness,proto3" json:"witness,omitempty"` //Can be empty
+	Actives      []*core.Permission `protobuf:"bytes,4,rep,name=actives,proto3" json:"actives,omitempty"` //Empty is invalidate
 }
 
 func (x *AccountPermissionUpdateContract) Reset() {
@@ -259,21 +260,21 @@ func (x *AccountPermissionUpdateContract) GetOwnerAddress() []byte {
 	return nil
 }
 
-func (x *AccountPermissionUpdateContract) GetOwner() *Permission {
+func (x *AccountPermissionUpdateContract) GetOwner() *core.Permission {
 	if x != nil {
 		return x.Owner
 	}
 	return nil
 }
 
-func (x *AccountPermissionUpdateContract) GetWitness() *Permission {
+func (x *AccountPermissionUpdateContract) GetWitness() *core.Permission {
 	if x != nil {
 		return x.Witness
 	}
 	return nil
 }
 
-func (x *AccountPermissionUpdateContract) GetActives() []*Permission {
+func (x *AccountPermissionUpdateContract) GetActives() []*core.Permission {
 	if x != nil {
 		return x.Actives
 	}
@@ -321,12 +322,12 @@ var file_core_contract_account_contract_proto_rawDesc = []byte{
 	0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x12, 0x2e, 0x0a, 0x07, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65,
 	0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63,
 	0x6f, 0x6c, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x07, 0x61,
-	0x63, 0x74, 0x69, 0x76, 0x65, 0x73, 0x42, 0x43, 0x0a, 0x18, 0x6f, 0x72, 0x67, 0x2e, 0x74, 0x72,
+	0x63, 0x74, 0x69, 0x76, 0x65, 0x73, 0x42, 0x4c, 0x0a, 0x18, 0x6f, 0x72, 0x67, 0x2e, 0x74, 0x72,
 	0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61,
-	0x63, 0x74, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6a,
+	0x63, 0x74, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6a,
 	0x61, 0x63, 0x6b, 0x2d, 0x6b, 0x6f, 0x6c, 0x69, 0x2f, 0x74, 0x72, 0x6f, 0x6e, 0x2d, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x63, 0x6f, 0x72, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x63, 0x6f, 0x72, 0x65, 0x2f, 0x63, 0x6f, 0x6e, 0x74,
+	0x72, 0x61, 0x63, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -347,8 +348,8 @@ var file_core_contract_account_contract_proto_goTypes = []interface{}{
 	(*AccountUpdateContract)(nil),           // 1: protocol.AccountUpdateContract
 	(*SetAccountIdContract)(nil),            // 2: protocol.SetAccountIdContract
 	(*AccountPermissionUpdateContract)(nil), // 3: protocol.AccountPermissionUpdateContract
-	(AccountType)(0),                        // 4: protocol.AccountType
-	(*Permission)(nil),                      // 5: protocol.Permission
+	(core.AccountType)(0),                   // 4: protocol.AccountType
+	(*core.Permission)(nil),                 // 5: protocol.Permission
 }
 var file_core_contract_account_contract_proto_depIdxs = []int32{
 	4, // 0: protocol.AccountCreateContract.type:type_name -> protocol.AccountType
@@ -367,7 +368,6 @@ func file_core_contract_account_contract_proto_init() {
 	if File_core_contract_account_contract_proto != nil {
 		return
 	}
-	file_core_Tron_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_core_contract_account_contract_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccountCreateContract); i {
