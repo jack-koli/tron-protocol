@@ -8,3 +8,12 @@
 ## 修改
 
 每个 proto 文件的 option go_package 部分
+
+## 使用
+
+
+```go
+import (
+	"github.com/jack-koli/tron-protocol/api"
+)
+```
