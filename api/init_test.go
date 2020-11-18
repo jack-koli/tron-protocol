@@ -13,14 +13,18 @@ func TestMain(m *testing.M)  {
 	os.Exit(m.Run())
 }
 
-
-func TestNewWalletClient(t *testing.T) {
+func GetNewWalletClient()  WalletClient {
 	conn, err := grpc.Dial("grpc.shasta.trongrid.io:50051", grpc.WithInsecure())
 	if err != nil {
-		t.Errorf("can not connect ot grpc node, err:%v", err)
+		log.Fatalf("can not connect ot grpc node, err:%v", err)
 	}
 
 	walletClient := NewWalletClient(conn)
+	return walletClient
+}
+
+func TestNewWalletClient(t *testing.T) {
+	walletClient := GetNewWalletClient()
 	block, err := walletClient.GetNowBlock(context.Background(), new(EmptyMessage))
 	if err != nil {
 		t.Errorf("get block err: %v", err)
