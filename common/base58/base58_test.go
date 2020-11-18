@@ -3,7 +3,7 @@ package base58
 import (
 	"strings"
 	"testing"
-	"tron/common/hexutil"
+	"github.com/jack-koli/tron-protocol/common/hexutil"
 )
 
 func TestEncode(t *testing.T) {

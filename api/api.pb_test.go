@@ -24,6 +24,6 @@ func TestGetAccount(t *testing.T)  {
 		log.Fatalf("can not get result of %s", addr)
 	}
 
-	contract := new(contract.)
+	//contract := new(contract.Acc)
 	log.Println("result:", result)
 }
